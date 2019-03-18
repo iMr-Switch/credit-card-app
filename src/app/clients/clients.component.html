@@ -1,0 +1,65 @@
+<h1>Lista de clientes</h1>
+<table class="table table-hover">
+  <tr>
+    <th>Nombre</th>
+    <th>Direccion</th>
+    <th>Ciudad</th>
+    <th>Telefono</th>
+    <th>Tarjeta No</th>
+  </tr>
+  <tr *ngFor="let client of clients">
+    <td>{{client.name}}</td>
+    <td>{{client.address}}</td>
+    <td>{{client.city}}</td>
+    <td>{{client.phone}}</td>
+    <td>
+      <p *ngFor="let card of client.cards">
+        {{card.substring(0,4)}} {{card.substring(4,8)}} {{card.substring(8,12)}} {{card.substring(12,16)}}
+        <button (click)="ViewShoppingHistory(card)" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">Ver Historial</button>
+      </p>
+    </td>
+  </tr>
+</table>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Historial</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2></h2>
+        <table class="table table-hover">
+          <tr>
+            <th>Tarjeta</th>
+            <th>Tipo</th>
+            <th>CCV</th>
+          </tr>
+          <tr *ngIf="selectedCard.data != null">
+            <td>{{selectedCard.card.substring(0,4)}} {{selectedCard.card.substring(4,8)}} {{selectedCard.card.substring(8,12)}} {{selectedCard.card.substring(12.16)}}</td>
+            <td>{{selectedCard.data.type}}</td>
+            <td>{{selectedCard.data.ccv}}</td>
+          </tr>
+        </table>
+        <table class="table table-hover">
+          <tr>
+            <th>Fecha</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+          </tr>
+          <tr *ngFor="let data of selectedCard.history">
+            <td>{{data.date}}</td>
+            <td>{{data.description}}</td>
+            <td>${{data.price}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

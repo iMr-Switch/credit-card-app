@@ -1,0 +1,19 @@
+<div class="jumbtron p-5">
+  <div class="row">
+    <div class="col-4 offset-2">
+      <button (click)="showClients()" class="btn btn-lg btn-primary">Lista Clientes</button>
+    </div>
+    <div class="col-4">
+      <button (click)="showAdvisers()" class="btn btn-lg btn-primary">Lista Empleados</button>
+    </div>
+    
+  </div>
+  <div class="row">    
+    <div *ngIf="clients" class="col-md-12">
+      <app-clients></app-clients>
+    </div>
+    <div *ngIf="advisers" class="col-md-12">
+      <app-advisers></app-advisers>
+    </div>
+  </div>
+</div>
